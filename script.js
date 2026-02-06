@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const musicBtn = document.getElementById('musicBtn');
     const audio = document.getElementById('bgMusic');
     const cardParticles = document.getElementById('cardParticles');
+    const boxLid = document.getElementById('boxLid');
+    const clickPrompt = document.querySelector('.click-prompt');
 
     // 1. Create Internal Floating Emojis
     function createCardAmbient() {
@@ -33,8 +35,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 3. Rose Click: Explosion + Message + Start Music
+    // 3. Rose Click: Explosion + Message + Start Music + OPEN BOX
     roseBox.addEventListener('click', (e) => {
+        // New Box Opening Logic
+        boxLid.classList.add('open');
+        roseBox.classList.add('open');
+        clickPrompt.style.opacity = '0';
+        clickPrompt.innerHTML="";
+
         if (audio.paused) {
             toggleMusic();
         }

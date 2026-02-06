@@ -16,6 +16,77 @@ body {
     font-family: 'Arial Rounded MT Bold', 'Helvetica', sans-serif;
 }
 
+/* --- New Box & Prompt Styles --- */
+.click-prompt {
+    color: var(--accent-pink);
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    animation: pulse 1.5s infinite;
+    font-weight: bold;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.7; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
+}
+
+.box-lid {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #ff85a1 0%, #ff69b4 100%);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 48px;
+}
+
+.box-lid::after {
+    content: '🎁';
+    font-size: 4rem;
+}
+
+.box-lid.open {
+    transform: translateY(-120%) rotate(-15deg);
+}
+
+/* --- Modified Original Classes --- */
+.rose-card {
+    position: relative;
+    cursor: pointer;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(12px);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50px;
+    box-shadow: 0 20px 45px rgba(255, 105, 180, 0.15);
+    animation: floaty 3s ease-in-out infinite;
+    transition: background 0.4s ease, transform 0.3s ease;
+    overflow: hidden; /* Important to hide the rose initially */
+    z-index: 2;
+    display: flex;
+    align-items: flex-end; /* Rose sits at bottom before pop-up */
+    width: 320px;
+    height: 380px;
+}
+
+.main-rose {
+    width: 320px;
+    height: auto;
+    filter: drop-shadow(0 10px 20px rgba(255, 105, 180, 0.4));
+    position: relative;
+    z-index: 2;
+    transform: translateY(100%); /* Start hidden */
+    transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.rose-card.open .main-rose {
+    transform: translateY(0); /* Pop up! */
+}
+
+/* --- Remaining Original Styles --- */
 body::after {
     content: '';
     position: absolute;
@@ -58,21 +129,6 @@ body::after {
     display: inline-block;
 }
 
-.rose-card {
-    position: relative;
-    cursor: pointer;
-    padding: 40px;
-    background: rgba(255, 255, 255, 0.35);
-    backdrop-filter: blur(12px);
-    border: 2px solid rgba(255, 255, 255, 0.5);
-    border-radius: 50px;
-    box-shadow: 0 20px 45px rgba(255, 105, 180, 0.15);
-    animation: floaty 3s ease-in-out infinite;
-    transition: background 0.4s ease, transform 0.3s ease;
-    overflow: hidden;
-    z-index: 2;
-}
-
 .card-particles {
     position: absolute;
     top: 0; left: 0;
@@ -91,14 +147,6 @@ body::after {
 @keyframes drift {
     0%, 100% { transform: translate(0, 0) rotate(0deg); }
     50% { transform: translate(15px, -30px) rotate(10deg); }
-}
-
-.main-rose {
-    width: 320px;
-    height: auto;
-    filter: drop-shadow(0 10px 20px rgba(255, 105, 180, 0.4));
-    position: relative;
-    z-index: 2;
 }
 
 .glow-aura {
